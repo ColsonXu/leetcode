@@ -39,4 +39,5 @@ class Twitter:
         self.followMap[followerId].add(followeeId)
 
     def unfollow(self, followerId, followeeId) -> None:
-        self.followMap[followerId].remove(followeeId)
+        if followeeId in self.followMap[followerId]:
+            self.followMap[followerId].remove(followeeId)
