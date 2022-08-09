@@ -3,7 +3,7 @@ class Solution:
         res = [0]
         seen = set()
         
-        def bfs(row, col):
+        def dfs(row, col):
             if grid[row][col] == "1" and (row, col) not in seen:
                 res[0] += 1
             
@@ -24,6 +24,6 @@ class Solution:
         
         for row in range(len(grid)):
             for col in range(len(grid[0])):
-                bfs(row, col)
+                dfs(row, col)
 
         return res[0]
