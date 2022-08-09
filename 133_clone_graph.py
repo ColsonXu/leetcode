@@ -1,13 +1,15 @@
-from collections import deque
-
 class Solution:
     def cloneGraph(self, node):
-        res = Node(node.val, [])
-        seen = set()
+        old_to_new = {}
 
-        def dfs(prev, queue):
-            curr = queue.popleft()
-            for n in curr.neighbors:
-                prev.neighbors.append(Node(n.val, []))
-                if n not in seen:
-                    dfs(n, [])
+        def dfs(n):
+            if n in old_to_new:
+                return old_to_new[n]
+
+            copy = Node(n.val)
+            old_to_new[n] = copy
+            for neighbor in n.neighbors:
+                copy.neighbors.append(dfs(neighbor))
+            return copy
+
+        return dfs(node) if node else None
